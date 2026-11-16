@@ -35,13 +35,20 @@
 - ✍️ 실기 대비: 4대 유형 접이식 가이드, 회차/유형/★ 필터, 🧭 풀이 틀, 📖 모범답안, 🔲 빈칸 암기 모드, ✅ 암기완료, 3문항·90분 실기 모의고사(답안 메모 + 일괄 대조)
 - ⚡ 암기카드 18장(공식·수치·법령), 📅 학습 로드맵 15단계
 
-## 배포(저장소 생성 승인 후)
+## 배포 (2026-11-16 완료)
+- 라이브: https://chataeyun.github.io/fpe-study/ (HTTP 200, 4.5MB index.html + figs 283개 정상)
+- 저장소: https://github.com/chataeyun/fpe-study (public), 커밋 a7d5607
+- **배포 소스 브랜치는 `gh-pages`** (main 아님 → GitHub Pages 설정에서 `gh-pages` / `/` 로 잡혀 있음).
+  - Pages API(`gh api -X POST repos/chataeyun/fpe-study/pages`)는 GitHub App에 Pages 권한이 없어 403이었고,
+    공개 저장소에 `gh-pages` 브랜치를 만들자 Pages가 자동 활성화되며 그 브랜치를 소스로 잡았다.
+  - 워크플로(.github/workflows/pages.yml) 우회도 App에 `workflows` 권한이 없어 푸시가 거부된다.
+- **내용을 고칠 때**: main 커밋 후 `git push origin main:gh-pages`까지 해야 사이트가 갱신된다.
+- 주의: Jekyll이 밑줄(`_`)로 시작하는 파일을 제외하므로 확인용 임시 페이지는 `m375.html`처럼 밑줄 없이 올린다.
+
 ```bash
 cd /workspace/fpe-study
-git init -b main && git add -A && git commit -m "소방설비기사(전기) 기출 학습 웹앱"
-gh repo create chataeyun/fpe-study --public --source=. --remote=origin --push
-gh api -X POST repos/chataeyun/fpe-study/pages -f "source[branch]=main" -f "source[path]=/"
-# 라이브: https://chataeyun.github.io/fpe-study/
+git add -A && git commit -m "..."
+git push origin main && git push origin main:gh-pages   # gh-pages = 배포 브랜치
 ```
 
 ## 재생성 파이프라인 (fpe-work/)

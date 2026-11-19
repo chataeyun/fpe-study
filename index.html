@@ -628,11 +628,11 @@ function termWrapNode(node, seen) {
   node.parentNode.replaceChild(frag, node);
 }
 
-function applyTerms() {
-  const app = document.getElementById("app");
-  if (!app || !termOn) return;
-  if (app.querySelector(".term-hl")) return;   // 이미 처리된 화면은 건너뛴다
-  const walker = document.createTreeWalker(app, NodeFilter.SHOW_TEXT, {
+function applyTerms(root) {
+  const scope = root || document.getElementById("app");
+  if (!scope || !termOn) return;
+  if (!root && scope.querySelector(".term-hl")) return;   // 이미 처리된 화면은 건너뛴다
+  const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
     acceptNode(n) {
       const v = n.nodeValue;
       if (!v || v.trim().length < 2) return NodeFilter.FILTER_REJECT;

@@ -615,8 +615,10 @@ function termWrapNode(node, seen) {
     const sp = document.createElement("span");
     sp.className = "term-hl";
     sp.setAttribute("data-t", t);
-    sp.setAttribute("role", "button");
-    sp.setAttribute("tabindex", "0");
+    if (!node.parentElement.closest("button")) {
+      sp.setAttribute("role", "button");
+      sp.setAttribute("tabindex", "0");
+    }
     sp.textContent = t;
     frag.appendChild(sp);
     last = m.index + t.length;
